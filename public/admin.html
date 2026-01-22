@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Kakap Casino</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/admin.html" class="navbar-brand"><span class="brand-emoji">🎰</span> Admin Panel</a>
+            <div class="navbar-menu">
+                <div class="navbar-user">
+                    <span id="userInfo" class="navbar-user-name"></span>
+                </div>
+                <div class="navbar-actions">
+                    <button onclick="logout()" class="btn btn-outline">Keluar</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card" style="margin-bottom: 1.5rem;">
+            <div>
+                <h2 class="card-title" style="margin-bottom: 0.25rem;">Dashboard Admin</h2>
+                <p class="text-muted">Ringkasan data, verifikasi, dan pengaturan game.</p>
+            </div>
+            <div id="adminStatus" class="text-muted" style="margin-top: 0.75rem;"></div>
+        </div>
+
+        <!-- Statistics Dashboard -->
+        <div class="grid grid-3" style="margin-bottom: 1.5rem;">
+            <div class="card text-center">
+                <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Total Pengguna</h3>
+                <div id="totalUsers" style="font-size: 2.5rem; font-weight: 800; color: var(--primary);">0</div>
+            </div>
+            <div class="card text-center">
+                <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Total Permainan</h3>
+                <div id="totalGames" style="font-size: 2.5rem; font-weight: 800; color: var(--secondary);">0</div>
+            </div>
+            <div class="card text-center">
+                <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Deposit Pending</h3>
+                <div id="pendingDeposits" style="font-size: 2.5rem; font-weight: 800; color: var(--warning);">0</div>
+            </div>
+        </div>
+
+        <div class="grid grid-3" style="margin-bottom: 2rem;">
+            <div class="card text-center">
+                <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Total Taruhan</h3>
+                <div id="totalBets" style="font-size: 2rem; font-weight: 800; color: var(--accent);">-</div>
+            </div>
+            <div class="card text-center">
+                <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Total Kemenangan</h3>
+                <div id="totalWinnings" style="font-size: 2rem; font-weight: 800; color: var(--success);">-</div>
+            </div>
+            <div class="card text-center">
+                <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Profit Rumah</h3>
+                <div id="houseProfit" style="font-size: 2rem; font-weight: 800; color: var(--primary);">-</div>
+            </div>
+        </div>
+
+        <div class="grid grid-3" style="margin-bottom: 2rem;">
+            <div class="card text-center">
+                <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Win Rate Roulette</h3>
+                <div id="rouletteWinRateStat" style="font-size: 2rem; font-weight: 800; color: var(--accent);">-</div>
+            </div>
+            <div class="card text-center">
+                <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">Win Rate Slot</h3>
+                <div id="slotWinRateStat" style="font-size: 2rem; font-weight: 800; color: var(--accent);">-</div>
+            </div>
+            <div class="card text-center">
+                <h3 style="color: var(--text-secondary); margin-bottom: 0.5rem;">House Edge</h3>
+                <div id="houseEdgeStat" style="font-size: 2rem; font-weight: 800; color: var(--accent);">-</div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="card" style="margin-bottom: 2rem;">
+            <div style="display: flex; gap: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem;">
+                <button onclick="showTab('deposits')" class="btn btn-primary tab-btn" id="depositsTab">Verifikasi
+                    Deposit</button>
+                <button onclick="showTab('users')" class="btn btn-outline tab-btn" id="usersTab">Manajemen User</button>
+                <button onclick="showTab('settings')" class="btn btn-outline tab-btn" id="settingsTab">Pengaturan
+                    Game</button>
+            </div>
+        </div>
+
+        <!-- Deposits Tab -->
+        <div id="depositsContent" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><span class="title-emoji">💳</span> Permintaan Deposit</h2>
+                </div>
+                <div id="depositsList">
+                    <p class="text-muted text-center">Memuat data...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Tab -->
+        <div id="usersContent" class="tab-content hidden">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">👥 Manajemen Pengguna</h2>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Saldo</th>
+                                <th>Win Rate Roulette (%)</th>
+                                <th>Mode Roulette</th>
+                                <th>Win Rate Slot (%)</th>
+                                <th>Mode Slot</th>
+                                <th>Role</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTable">
+                            <tr>
+                                <td colspan="9" class="text-center text-muted">Memuat data...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settingsContent" class="tab-content hidden">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">⚙️ Pengaturan Game</h2>
+                </div>
+                <form id="settingsForm">
+                    <div class="form-group">
+                        <label class="form-label">Win Rate Roulette (%)</label>
+                        <input type="number" id="rouletteWinRate" class="form-input" min="0" max="100" step="0.1">
+                        <small class="text-muted">Persentase kemenangan untuk game Roulette</small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mode Roulette</label>
+                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                            <button type="button" id="rouletteOrganicToggle" class="btn btn-outline">Mode Organik: OFF</button>
+                            <input type="hidden" id="rouletteOrganic" value="false">
+                            <span class="text-muted">Gunakan rate organik (tanpa campur tangan admin)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Win Rate Slot (%)</label>
+                        <input type="number" id="slotWinRate" class="form-input" min="0" max="100" step="0.1">
+                        <small class="text-muted">Persentase kemenangan untuk game Slot</small>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mode Slot</label>
+                        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+                            <button type="button" id="slotOrganicToggle" class="btn btn-outline">Mode Organik: OFF</button>
+                            <input type="hidden" id="slotOrganic" value="false">
+                            <span class="text-muted">Gunakan rate organik (tanpa campur tangan admin)</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">House Edge (%)</label>
+                        <input type="number" id="houseEdge" class="form-input" min="0" max="100" step="0.1">
+                        <small class="text-muted">Keuntungan rumah dalam persentase</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span>Simpan Pengaturan</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit User Modal -->
+    <div id="editUserModal" class="modal hidden" onclick="closeEditModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 style="margin: 0;">Edit Pengguna</h2>
+                <button onclick="closeEditModal()" class="btn btn-outline" style="padding: 0.5rem 0.75rem;">✕</button>
+            </div>
+            <form id="editUserForm">
+                <input type="hidden" id="editUserId">
+                <div class="form-group">
+                    <label class="form-label">Saldo (Rp)</label>
+                    <input type="number" id="editBalance" class="form-input" step="1000">
+                </div>
+                <div class="form-group" id="editRouletteWinRateGroup">
+                    <label class="form-label">Custom Win Rate Roulette (%)</label>
+                    <input type="number" id="editRouletteWinRate" class="form-input" min="0" max="100" step="0.1"
+                        placeholder="Kosongkan untuk default">
+                    <small class="text-muted">Kosongkan untuk menggunakan win rate roulette default</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mode Roulette (User)</label>
+                    <select id="editRouletteMode" class="form-select">
+                        <option value="inherit">Ikuti Global</option>
+                        <option value="organic">Paksa Organik</option>
+                        <option value="custom">Paksa Custom</option>
+                    </select>
+                </div>
+                <div class="form-group" id="editSlotWinRateGroup">
+                    <label class="form-label">Custom Win Rate Slot (%)</label>
+                    <input type="number" id="editSlotWinRate" class="form-input" min="0" max="100" step="0.1"
+                        placeholder="Kosongkan untuk default">
+                    <small class="text-muted">Kosongkan untuk menggunakan win rate slot default</small>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Mode Slot (User)</label>
+                    <select id="editSlotMode" class="form-select">
+                        <option value="inherit">Ikuti Global</option>
+                        <option value="organic">Paksa Organik</option>
+                        <option value="custom">Paksa Custom</option>
+                    </select>
+                </div>
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Simpan</button>
+                    <button type="button" onclick="closeEditModal()" class="btn btn-outline"
+                        style="flex: 1;">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Deposit Detail Modal -->
+    <div id="depositModal" class="modal hidden" onclick="closeDepositModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 style="margin: 0;">Detail Deposit</h2>
+                <button onclick="closeDepositModal()" class="btn btn-outline"
+                    style="padding: 0.5rem 0.75rem;">✕</button>
+            </div>
+            <div id="depositDetail"></div>
+            <button onclick="closeDepositModal()" class="btn btn-primary"
+                style="width: 100%; margin-top: 1rem;">Tutup</button>
+        </div>
+    </div>
+
+    <script>
+        // CRITICAL: Define all functions BEFORE external scripts load
+        console.log('Inline script loading...');
+
+        function closeEditModal() {
+            console.log('closeEditModal called');
+            const modal = document.getElementById('editUserModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function closeDepositModal() {
+            console.log('closeDepositModal called');
+            const modal = document.getElementById('depositModal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function showTab(tab) {
+            console.log('showTab called:', tab);
+            document.querySelectorAll(".tab-content").forEach(el => el.classList.add("hidden"));
+            document.querySelectorAll(".tab-btn").forEach(btn => {
+                btn.classList.remove("btn-primary");
+                btn.classList.add("btn-outline");
+            });
+            const content = document.getElementById(tab + "Content");
+            const tabBtn = document.getElementById(tab + "Tab");
+            if (content) content.classList.remove("hidden");
+            if (tabBtn) {
+                tabBtn.classList.remove("btn-outline");
+                tabBtn.classList.add("btn-primary");
+            }
+        }
+
+        // FORCE close all modals when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOMContentLoaded - forcing modals closed');
+            const editModal = document.getElementById('editUserModal');
+            const depositModal = document.getElementById('depositModal');
+            if (editModal) editModal.classList.add('hidden');
+            if (depositModal) depositModal.classList.add('hidden');
+        });
+
+        console.log('Inline script loaded successfully');
+    </script>
+
+    <script src="/js/auth.js?v=20240124"></script>
+    <script src="/js/admin.js?v=20240124" onerror="window.__adminLoadError = true;"></script>
+    <script>
+        setTimeout(function () {
+            if (window.__adminBooted) return;
+            if (window.location.protocol === 'file:') {
+                const statusEl = document.getElementById('adminStatus');
+                if (statusEl) {
+                    statusEl.textContent = 'Buka halaman lewat http://localhost:3000 agar script admin bisa dimuat.';
+                    statusEl.style.color = 'var(--danger)';
+                }
+                return;
+            }
+            if (!window.__adminLoadError) return;
+            const statusEl = document.getElementById('adminStatus');
+            if (statusEl) {
+                statusEl.textContent = 'Gagal memuat script admin.';
+                statusEl.style.color = 'var(--danger)';
+            }
+        }, 2000);
+    </script>
+</body>
+
+</html>

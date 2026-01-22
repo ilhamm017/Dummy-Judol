@@ -1,0 +1,381 @@
+/* Roulette Wheel Styles */
+.roulette-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+}
+
+.roulette-wheel {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg,
+            #c41e3a 0deg 9.72deg,
+            #000 9.72deg 19.44deg,
+            #c41e3a 19.44deg 29.16deg,
+            #000 29.16deg 38.88deg,
+            #c41e3a 38.88deg 48.6deg,
+            #000 48.6deg 58.32deg,
+            #c41e3a 58.32deg 68.04deg,
+            #000 68.04deg 77.76deg,
+            #c41e3a 77.76deg 87.48deg,
+            #000 87.48deg 97.2deg,
+            #c41e3a 97.2deg 106.92deg,
+            #000 106.92deg 116.64deg,
+            #c41e3a 116.64deg 126.36deg,
+            #000 126.36deg 136.08deg,
+            #c41e3a 136.08deg 145.8deg,
+            #000 145.8deg 155.52deg,
+            #c41e3a 155.52deg 165.24deg,
+            #000 165.24deg 174.96deg,
+            #c41e3a 174.96deg 184.68deg,
+            #000 184.68deg 194.4deg,
+            #c41e3a 194.4deg 204.12deg,
+            #000 204.12deg 213.84deg,
+            #c41e3a 213.84deg 223.56deg,
+            #000 223.56deg 233.28deg,
+            #c41e3a 233.28deg 243deg,
+            #000 243deg 252.72deg,
+            #c41e3a 252.72deg 262.44deg,
+            #000 262.44deg 272.16deg,
+            #c41e3a 272.16deg 281.88deg,
+            #000 281.88deg 291.6deg,
+            #c41e3a 291.6deg 301.32deg,
+            #000 301.32deg 311.04deg,
+            #c41e3a 311.04deg 320.76deg,
+            #000 320.76deg 330.48deg,
+            #c41e3a 330.48deg 340.2deg,
+            #000 340.2deg 349.92deg,
+            #c41e3a 349.92deg 360deg);
+    border: 10px solid #ffd700;
+    box-shadow:
+        0 0 30px rgba(255, 215, 0, 0.5),
+        inset 0 0 50px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.roulette-center-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: #0f7e0f;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.5rem;
+    box-shadow: 0 0 20px rgba(15, 126, 15, 0.7);
+    z-index: 2;
+}
+
+.roulette-ball-orbit {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+}
+
+.roulette-ball {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15px;
+    height: 15px;
+    background: radial-gradient(circle, white, silver);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Ball rotation handled via JS for precise stopping */
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(1800deg);
+    }
+}
+
+.result-display {
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background: var(--bg-tertiary);
+    border: 2px solid var(--border-color);
+    text-align: center;
+    min-height: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-number {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.result-message {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.roulette-numbers {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.roulette-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 22px;
+    height: 22px;
+    margin: -11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.roulette-number.red {
+    color: #fda4af;
+}
+
+.roulette-number.black {
+    color: #e2e8f0;
+}
+
+.roulette-number.green {
+    color: #34d399;
+}
+
+.betting-panel {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.betting-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: 1rem;
+    align-items: end;
+}
+
+.betting-row .form-group {
+    margin-bottom: 0;
+}
+
+.betting-balance {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.85rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.25);
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+.betting-balance span:last-child {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+@media (min-width: 769px) {
+    .roulette-card .card-header {
+        margin-bottom: 1rem;
+    }
+
+    .roulette-card .roulette-container {
+        padding: 1.5rem 0 1rem;
+    }
+
+    .roulette-card .result-display {
+        margin-top: 1rem;
+        padding: 1rem;
+        min-height: 140px;
+    }
+
+    .roulette-card .betting-panel {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+    }
+
+    .roulette-card .betting-panel h3 {
+        margin-bottom: 0.75rem;
+    }
+
+    .roulette-card .betting-panel .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .betting-balance {
+        margin-bottom: 0.7rem;
+        padding: 0.55rem 0.75rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .roulette-card .card-header {
+        margin-bottom: 0.75rem;
+    }
+
+    .roulette-container {
+        padding: 1.25rem 0 0.5rem;
+    }
+
+    .roulette-wheel {
+        width: 240px;
+        height: 240px;
+        border-width: 8px;
+    }
+
+    .roulette-center-number {
+        width: 52px;
+        height: 52px;
+        font-size: 1.3rem;
+    }
+
+    .roulette-ball {
+        width: 12px;
+        height: 12px;
+        top: 6px;
+    }
+
+    .roulette-number {
+        width: 18px;
+        height: 18px;
+        margin: -9px;
+        font-size: 0.6rem;
+    }
+
+    .result-display {
+        margin-top: 0.75rem;
+        padding: 0.75rem;
+        min-height: 120px;
+    }
+
+    .result-number {
+        font-size: 2.2rem;
+        margin-bottom: 0.35rem;
+    }
+
+    .result-message {
+        font-size: 1rem;
+    }
+
+    .betting-panel {
+        margin-top: 1rem;
+        padding-top: 1rem;
+    }
+
+    .betting-panel h3 {
+        margin-bottom: 0.6rem;
+        font-size: 1.1rem;
+    }
+
+    .betting-panel .form-group {
+        margin-bottom: 0.75rem;
+    }
+
+    .betting-panel .form-input,
+    .betting-panel .form-select {
+        padding: 0.7rem 0.85rem;
+        font-size: 0.95rem;
+    }
+
+    .betting-panel .btn {
+        padding: 0.75rem !important;
+        font-size: 1rem !important;
+    }
+
+    .betting-balance {
+        margin-bottom: 0.65rem;
+        padding: 0.5rem 0.7rem;
+        font-size: 0.9rem;
+    }
+
+    .betting-row {
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.7fr);
+        gap: 0.6rem;
+    }
+
+    .betting-row .form-label {
+        font-size: 0.85rem;
+    }
+}
+
+/* History Item */
+.history-item {
+    padding: 1rem;
+    background: var(--bg-tertiary);
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 0.75rem;
+    border-left: 4px solid transparent;
+    transition: all var(--transition-base);
+}
+
+.history-item.win {
+    border-left-color: var(--success);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.history-item.lose {
+    border-left-color: var(--danger);
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.history-item:hover {
+    transform: translateX(4px);
+}
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.history-result {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.history-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.history-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.history-scroll {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 380px;
+    padding-right: 0.25rem;
+}

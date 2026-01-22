@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kakap Casino - Roulette</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/roulette.css">
+</head>
+
+<body class="casino-body">
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="/game.html" class="navbar-brand"><span class="brand-emoji">🎰</span> Kakap Casino</a>
+            <div class="navbar-menu">
+                <div class="navbar-user">
+                    <span id="userInfo" class="navbar-user-name"></span>
+                    <span id="balanceDisplay" class="navbar-user-balance">Saldo: Rp 0</span>
+                </div>
+                <div class="navbar-actions">
+                    <a href="/deposit.html" class="btn btn-secondary">Deposit</a>
+                    <button onclick="logout()" class="btn btn-outline">Keluar</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="game-tabs-bar">
+            <div class="game-tabs">
+                <a href="/game.html" class="btn btn-primary">Roulette</a>
+                <a href="/slot.html" class="btn btn-outline">Slot</a>
+            </div>
+        </div>
+        <div class="grid grid-2">
+            <!-- Roulette Wheel Section -->
+            <div class="card roulette-card">
+                <div class="card-header">
+                    <h2 class="card-title"><span class="title-emoji">🎡</span> Roda Roulette</h2>
+                </div>
+
+                <div class="roulette-container">
+                    <div id="rouletteWheel" class="roulette-wheel">
+                        <div class="roulette-ball-orbit">
+                            <div class="roulette-ball"></div>
+                        </div>
+                        <div id="rouletteCenterNumber" class="roulette-center-number">0</div>
+                        <div class="roulette-numbers"></div>
+                    </div>
+                    <div id="result" class="result-display"></div>
+                </div>
+
+                <!-- Betting Panel -->
+                <div class="betting-panel">
+                    <h3 style="margin-bottom: 1rem;">Pasang Taruhan</h3>
+
+                    <div class="form-group">
+                        <label class="form-label">Jumlah Taruhan (Rp)</label>
+                        <input type="number" id="betAmount" class="form-input" min="1000" step="1000" value="10000">
+                    </div>
+
+                    <div class="betting-row">
+                        <div class="form-group">
+                            <label class="form-label">Tipe Taruhan</label>
+                            <select id="betType" class="form-select" onchange="updateBetOptions()">
+                                <option value="number">Angka Spesifik (35x)</option>
+                                <option value="red">Merah (2x)</option>
+                                <option value="black">Putih (2x)</option>
+                                <option value="odd">Ganjil (2x)</option>
+                                <option value="even">Genap (2x)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="numberSelect">
+                            <label class="form-label">Pilih Angka (0-36)</label>
+                            <input type="number" id="betValue" class="form-input" min="0" max="36" value="7">
+                        </div>
+                    </div>
+
+                    <div class="betting-balance">
+                        <span>Saldo saat ini</span>
+                        <span id="balanceInGame">Rp 0</span>
+                    </div>
+
+                    <button id="spinButton" onclick="spinRoulette()" class="btn btn-primary btn-roll"
+                        style="width: 100%; font-size: 1.1rem; padding: 1rem;">
+                        <span>🎰 PUTAR ROULETTE</span>
+                    </button>
+                    <div id="betHint" class="text-muted" style="margin-top: 0.75rem;"></div>
+                </div>
+            </div>
+
+            <!-- History Section -->
+            <div class="card history-card">
+                <div class="card-header">
+                    <h2 class="card-title"><span class="title-emoji">📊</span> Riwayat Permainan</h2>
+                </div>
+
+                <div id="gameStatus" class="text-muted" style="margin-bottom: 0.75rem;"></div>
+                <div id="gameHistory" class="history-scroll">
+                    <p class="text-muted text-center">Belum ada riwayat permainan</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/auth.js?v=20240123"></script>
+    <script src="/js/game.js?v=20240123"></script>
+</body>
+
+</html>
