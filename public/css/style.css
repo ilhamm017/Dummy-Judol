@@ -393,9 +393,10 @@ body.casino-body::after {
     gap: 1.25rem;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    scroll-padding: 9vw;
-    padding: 0 9vw 0;
+    scroll-padding: 12vw;
+    padding: 0 12vw 0;
     -webkit-overflow-scrolling: touch;
+    justify-content: center;
   }
 
   .auth-shell::-webkit-scrollbar {
@@ -407,7 +408,7 @@ body.casino-body::after {
   }
 
   .auth-shell > section {
-    flex: 0 0 74vw;
+    flex: 0 0 72vw;
     max-width: 420px;
     scroll-snap-align: center;
   }
@@ -417,7 +418,7 @@ body.casino-body::after {
   }
 
   .auth-hero {
-    order: 2;
+    display: none;
   }
 
   .auth-mascot-bg {
@@ -432,21 +433,22 @@ body.casino-body::after {
 
 @media (max-width: 600px) {
   .auth-page {
-    align-items: flex-start;
-    padding: 1.25rem 1rem 1rem;
+    align-items: center;
+    padding: 0.75rem 1rem;
   }
 
   .auth-hero {
-    padding: 1.75rem 1.5rem 2.5rem;
+    padding: 1.4rem 1.25rem 2rem;
   }
 
   .auth-shell {
-    padding: 0 7vw;
-    scroll-padding: 7vw;
+    padding: 0 16vw;
+    scroll-padding: 16vw;
   }
 
   .auth-shell > section {
-    flex-basis: 80vw;
+    flex-basis: 64vw;
+    max-width: 320px;
   }
 
   .auth-mascot-bg {
@@ -458,8 +460,53 @@ body.casino-body::after {
     opacity: 0.28;
   }
 
+  .auth-card {
+    padding: 1.1rem 1rem;
+  }
+
+  .auth-hero-title {
+    font-size: 1.7rem;
+  }
+
+  .auth-hero-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .auth-hero-footer {
+    font-size: 0.85rem;
+  }
+
+  .auth-card-title {
+    font-size: 1.45rem;
+  }
+
+  .auth-card-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .auth-section-title {
+    font-size: 1rem;
+  }
+
+  .auth-eyebrow {
+    font-size: 0.65rem;
+  }
+
+  .form-label {
+    font-size: 0.85rem;
+  }
+
+  .form-input {
+    padding: 0.65rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .auth-link {
+    font-size: 0.9rem;
+  }
+
   .auth-page {
-    padding-bottom: 1rem;
+    padding-bottom: 0.75rem;
   }
 }
 
