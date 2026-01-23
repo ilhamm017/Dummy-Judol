@@ -329,11 +329,17 @@ body.casino-body::after {
 }
 
 .auth-card {
-  background: rgba(12, 12, 22, 0.82);
+  background: rgba(12, 12, 22, 0.4);
   border-radius: var(--border-radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.12);
   padding: 2.5rem;
   box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4);
+}
+
+.auth-body .form-input,
+.auth-body .form-select,
+.auth-body .form-textarea {
+  background: rgba(18, 18, 32, 0.65);
 }
 
 .auth-card:hover {
@@ -456,7 +462,7 @@ body.casino-body::after {
   .auth-mascot-bg {
     right: 50%;
     top: 56%;
-    transform: translate(58%, -45%);
+    transform: translate(78%, -30%);
     width: min(520px, 88vw);
     height: min(680px, 90vh);
     max-width: 92vw;
