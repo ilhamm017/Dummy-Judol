@@ -86,8 +86,6 @@ body.auth-body {
   background: radial-gradient(circle at top right, rgba(255, 204, 128, 0.15), transparent 55%),
     radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.12), transparent 45%),
     linear-gradient(135deg, #0c0c1f 0%, #0a0816 55%, #06060f 100%);
-  min-height: 100vh;
-  overflow-x: hidden;
 }
 
 body.auth-body::before {
@@ -198,7 +196,7 @@ body.casino-body::after {
 }
 
 .auth-page {
-  min-height: 100svh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -434,7 +432,11 @@ body.casino-body::after {
 @media (max-width: 600px) {
   .auth-page {
     align-items: center;
-    padding: 0.75rem 1rem;
+    padding: 0.6rem 0.8rem;
+    padding-bottom: 0.6rem;
+    min-height: 100svh;
+    height: 100svh;
+    overflow: hidden;
   }
 
   .auth-hero {
@@ -453,11 +455,13 @@ body.casino-body::after {
 
   .auth-mascot-bg {
     right: 50%;
-    top: 55%;
-    transform: translate(55%, -50%);
-    width: 600px;
-    height: 800px;
-    opacity: 0.28;
+    top: 56%;
+    transform: translate(58%, -45%);
+    width: min(520px, 88vw);
+    height: min(680px, 90vh);
+    max-width: 92vw;
+    max-height: 92vh;
+    opacity: 0.25;
   }
 
   .auth-card {
@@ -503,10 +507,6 @@ body.casino-body::after {
 
   .auth-link {
     font-size: 0.9rem;
-  }
-
-  .auth-page {
-    padding-bottom: 0.75rem;
   }
 }
 
